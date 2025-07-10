@@ -8,6 +8,11 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                baloo: ["var(--font-baloo)"],
+                fredoka: ["var(--font-fredoka)"],
+                sans: ["var(--font-fredoka)", "ui-sans-serif", "system-ui"],
+            },
             animation: {
                 "marquee-rtl": "marquee-rtl 25s linear infinite",
                 "zoom-slow": "zoom 20s ease-in-out infinite",

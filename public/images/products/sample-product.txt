@@ -1,0 +1,13 @@
+This is just a sample file to indicate that product images would normally be stored in this directory. 
+
+In a production environment, you would have actual product images here with the following file names:
+- dino-color-match.jpg
+- wooden-mosaic.jpg
+- balancing-rabbit.jpg
+- wooden-beads.jpg
+- stacking-tray.jpg
+- russian-blocks.jpg
+- nut-truck.jpg
+- bead-count.jpg
+
+Since we don't have these specific images in the repository, we're using existing images from the public directory as placeholders in our PopularProducts component.

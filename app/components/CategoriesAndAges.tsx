@@ -46,17 +46,15 @@ export default function CategoriesAndAges() {
         <div className="bg-[#f6f7fa] min-h-screen w-full py-12 px-4">
             {/* CATEGORIES */}
             <div className="text-center mb-10">
-                <p className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">
+                <h2 className="text-4xl md:text-5xl font-bold text-black mb-2">
                     Categories
-                </p>
-                <h2 className="text-3xl md:text-4xl font-bold text-[#111827] mt-2">
-                    We design toys not just for kids
-                    <br />
-                    but <span className="text-indigo-600">with kids</span>
                 </h2>
+                <p className="text-sm font-medium text-gray-600 max-w-lg mx-auto">
+                    We design toys not just for kids but with kids
+                </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl  mx-auto">
                 {categories.map((cat, i) => (
                     <div
                         key={i}
@@ -83,13 +81,13 @@ export default function CategoriesAndAges() {
             </div>
 
             {/* SHOP BY AGE */}
-            <div className="text-center mt-20 mb-6">
-                <p className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">
-                    JJ Toys & Games
-                </p>
-                <h2 className="text-3xl md:text-4xl font-bold text-[#111827] mt-2">
+            <div className="text-center mt-36 mb-6">
+                <h2 className="text-4xl md:text-5xl font-bold text-black mb-2">
                     Shop By Age
                 </h2>
+                <p className="text-sm font-medium text-gray-600 max-w-lg mx-auto">
+                    JJ Toys & Games for every stage of childhood development
+                </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">

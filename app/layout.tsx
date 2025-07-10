@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Baloo_2, Fredoka } from "next/font/google";
 import "./globals.css";
 
-const nunito = Nunito({
+const baloo = Baloo_2({
     subsets: ["latin"],
-    variable: "--font-nunito",
+    variable: "--font-baloo",
+    display: "swap",
+});
+
+const fredoka = Fredoka({
+    subsets: ["latin"],
+    variable: "--font-fredoka",
+    display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +27,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${nunito.variable} font-sans antialiased m-0 p-0 overflow-x-hidden`}
+                className={`${baloo.variable} ${fredoka.variable} font-sans antialiased m-0 p-0 overflow-x-hidden`}
             >
                 {children}
             </body>
