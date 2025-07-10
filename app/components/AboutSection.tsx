@@ -23,7 +23,7 @@ export default function AboutSection() {
                     {/* Circle Stamp - positioned at right and slightly above */}
                     <div className="absolute right-0 top-1/3 transform -translate-y-1/2 -translate-x-8 w-32 h-32">
                         <CircularText
-                            text="REACT*BITS*COMPONENTS*"
+                            text="ABOUT*US*ABOUT*US*ABOUT*US*"
                             onHover="speedUp"
                             spinDuration={20}
                             className="custom-class"
