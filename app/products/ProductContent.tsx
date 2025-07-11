@@ -9,11 +9,15 @@ export default function ProductContent() {
     const searchParams = useSearchParams();
     const age = searchParams.get("age");
     const category = searchParams.get("category");
+    const searchTerm = searchParams.get("search");
 
     const filteredProducts = products.filter((product) => {
         const ageMatch = age ? product.ageGroup === age : true;
         const catMatch = category ? product.category === category : true;
-        return ageMatch && catMatch;
+        const searchMatch = searchTerm
+            ? product.name.toLowerCase().includes(searchTerm.toLowerCase())
+            : true;
+        return ageMatch && catMatch && searchMatch;
     });
 
     return (
