@@ -176,11 +176,11 @@ export default function Footer() {
                 © 2024 The Joy Junction | A Venture of VYOM COMMERCE | Made with
                 ♥ by:{" "}
                 <Link
-                    href="https://kanakdigifex.com"
+                    href="https://astrolabs.studio"
                     className="text-pink-400 underline"
                     target="_blank"
                 >
-                    Kanak Digifex Pvt. Ltd.
+                    AstroLabs
                 </Link>
             </div>
         </footer>

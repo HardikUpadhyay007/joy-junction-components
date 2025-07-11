@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Baloo_2, Fredoka } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import TopMarquee from "./components/Marquee";
 
 const baloo = Baloo_2({
     subsets: ["latin"],
@@ -29,7 +32,10 @@ export default function RootLayout({
             <body
                 className={`${baloo.variable} ${fredoka.variable} font-sans antialiased m-0 p-0 overflow-x-hidden`}
             >
+                <TopMarquee />
+                <Navbar />
                 {children}
+                <Footer />
             </body>
         </html>
     );
