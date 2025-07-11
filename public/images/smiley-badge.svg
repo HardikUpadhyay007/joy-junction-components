@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Circle background -->
+  <circle cx="60" cy="60" r="58" fill="#FFC107" />
+  
+  <!-- Text around the circle -->
+  <path id="textPath" d="M60,10 a50,50 0 1,1 0,100 a50,50 0 1,1 0,-100" fill="none" />
+  <text font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#1E2A4A">
+    <textPath href="#textPath" startOffset="0%">ABOUT US • ABOUT US • ABOUT US • ABOUT US •</textPath>
+  </text>
+  
+  <!-- Smiley face -->
+  <circle cx="60" cy="60" r="35" fill="#FFC107" stroke="#1E2A4A" stroke-width="0" />
+  <path d="M40,60 C40,70 50,80 60,80 C70,80 80,70 80,60" fill="none" stroke="#1E2A4A" stroke-width="4" stroke-linecap="round" />
+  <circle cx="45" cy="45" r="5" fill="#1E2A4A" />
+  <circle cx="75" cy="45" r="5" fill="#1E2A4A" />
+</svg>

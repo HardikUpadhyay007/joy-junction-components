@@ -18,6 +18,8 @@ const config: Config = {
                 "marquee-rtl": "marquee-rtl 25s linear infinite",
                 "zoom-slow": "zoom 20s ease-in-out infinite",
                 fadeIn: "fadeIn 1s ease-in-out",
+                "slide-left": "slide-left 0.3s ease-out",
+                "spin-slow": "spin 15s linear infinite",
             },
             keyframes: {
                 "marquee-rtl": {
@@ -32,6 +34,10 @@ const config: Config = {
                 fadeIn: {
                     "0%": { opacity: "0" },
                     "100%": { opacity: "1" },
+                },
+                "slide-left": {
+                    "0%": { transform: "translateX(100%)" },
+                    "100%": { transform: "translateX(0)" },
                 },
             },
         },

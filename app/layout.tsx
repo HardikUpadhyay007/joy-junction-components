@@ -1,21 +1,9 @@
 import type { Metadata } from "next";
-import { Baloo_2, Fredoka, Quicksand } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import TopMarquee from "./components/Marquee";
-
-const baloo = Baloo_2({
-    subsets: ["latin"],
-    variable: "--font-baloo",
-    display: "swap",
-});
-
-const fredoka = Fredoka({
-    subsets: ["latin"],
-    variable: "--font-fredoka",
-    display: "swap",
-});
 
 const quicksand = Quicksand({
     subsets: ["latin"],
@@ -38,7 +26,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${baloo.variable} ${fredoka.variable} ${quicksand.variable} font-quicksand antialiased m-0 p-0 overflow-x-hidden`}
+                className={`${quicksand.className} font-quicksand antialiased m-0 p-0 overflow-x-hidden`}
             >
                 <TopMarquee />
                 <Navbar />

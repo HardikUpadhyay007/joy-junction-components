@@ -8,6 +8,7 @@ import HeroSlider from "./components/HeroSlider";
 // import Navbar from "./components/Navbar";
 import PopularProducts from "./components/PopularProducts";
 import Testimonials from "./components/TestimonialSection";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 export default function Page() {
     return (
@@ -21,6 +22,10 @@ export default function Page() {
             <FeatureStrip />
             <Testimonials />
             <BlogCarousel />
+            <WhatsAppButton
+                phoneNumber="919321791644"
+                message="Hello from The Joy Junction! I'm interested in learning more about your educational toys."
+            />
         </main>
     );
 }
