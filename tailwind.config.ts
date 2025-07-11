@@ -11,7 +11,8 @@ const config: Config = {
             fontFamily: {
                 baloo: ["var(--font-baloo)"],
                 fredoka: ["var(--font-fredoka)"],
-                sans: ["var(--font-fredoka)", "ui-sans-serif", "system-ui"],
+                quicksand: ["var(--font-quicksand)", "sans-serif"],
+                sans: ["var(--font-quicksand)", "ui-sans-serif", "system-ui"],
             },
             animation: {
                 "marquee-rtl": "marquee-rtl 25s linear infinite",

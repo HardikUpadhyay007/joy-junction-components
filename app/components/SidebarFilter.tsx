@@ -22,7 +22,7 @@ const SidebarFilter = () => {
         if (!searchTerm && currentSearch) {
             setSearchTerm(currentSearch);
         }
-    }, [currentSearch]);
+    }, [currentSearch, searchTerm]);
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {

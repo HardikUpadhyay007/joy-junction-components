@@ -169,6 +169,7 @@ const Navbar = () => {
                         }`}
                     >
                         <div className="absolute top-0 left-4 -mt-2 transform rotate-45 w-3 h-3 bg-white"></div>
+
                         <h3 className="font-semibold text-blue-600 border-b pb-1 mb-2">
                             Categories
                         </h3>
@@ -191,13 +192,13 @@ const Navbar = () => {
                 </div>
 
                 <Link
-                    href="#"
+                    href="/customkit"
                     className="hover:text-blue-300 transition-colors"
                 >
                     Custom Kit
                 </Link>
                 <Link
-                    href="#"
+                    href="/contact"
                     className="hover:text-blue-300 transition-colors"
                 >
                     Contact Us
