@@ -20,11 +20,26 @@ const config: Config = {
                 fadeIn: "fadeIn 1s ease-in-out",
                 "slide-left": "slide-left 0.3s ease-out",
                 "spin-slow": "spin 15s linear infinite",
+                float: "float 6s ease-in-out infinite",
+                "bounce-slow": "bounce-slow 3s ease-in-out infinite",
+                "pulse-slow": "pulse-slow 4s ease-in-out infinite",
             },
             keyframes: {
                 "marquee-rtl": {
                     "0%": { transform: "translateX(-100%)" },
                     "100%": { transform: "translateX(100%)" },
+                },
+                float: {
+                    "0%, 100%": { transform: "translateY(0)" },
+                    "50%": { transform: "translateY(-10px)" },
+                },
+                "bounce-slow": {
+                    "0%, 100%": { transform: "translateY(0)" },
+                    "50%": { transform: "translateY(-10px)" },
+                },
+                "pulse-slow": {
+                    "0%, 100%": { opacity: "0.15" },
+                    "50%": { opacity: "0.3" },
                 },
                 zoom: {
                     "0%": { transform: "scale(1)" },

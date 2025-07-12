@@ -1,47 +1,66 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 const categories = [
     {
-        title: "CARD-TASTIC FUN",
+        title: "Card-Tastic Fun",
         image: "/category1.jpg",
+        slug: "Card-Tastic Fun",
     },
     {
         title: "Flashcard Fun",
         image: "/category2.jpg",
+        slug: "Flashcard Fun",
     },
     {
         title: "Kid's Development Games",
         image: "/category3.jpg",
+        slug: "Kid's Development Games",
     },
     {
         title: "Wooden Wonders",
         image: "/category4.png",
+        slug: "Wooden Wonders",
     },
 ];
 
 const shopByAge = [
     {
-        age: "2 - 4",
+        age: "2-4",
         image: "/age-2-4.jpg",
+        slug: "2-4",
     },
     {
-        age: "4 - 6",
+        age: "4-6",
         image: "/age-4-6.jpg",
+        slug: "4-6",
     },
     {
-        age: "6 - 8",
+        age: "6-8",
         image: "/age-6-8.jpg",
+        slug: "6-8",
     },
     {
-        age: "8 +",
+        age: "8+",
         image: "/age-8-plus.jpg",
+        slug: "8+",
     },
 ];
 
 export default function CategoriesAndAges() {
+    const router = useRouter();
+
+    const handleCategoryClick = (category: string) => {
+        router.push(`/products?category=${encodeURIComponent(category)}`);
+    };
+
+    const handleAgeClick = (age: string) => {
+        router.push(`/products?age=${encodeURIComponent(age)}`);
+    };
+
     return (
         <div className="bg-[#f6f7fa] min-h-screen w-full py-12 px-4">
             {/* CATEGORIES */}
@@ -58,7 +77,8 @@ export default function CategoriesAndAges() {
                 {categories.map((cat, i) => (
                     <div
                         key={i}
-                        className="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition"
+                        className="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition cursor-pointer"
+                        onClick={() => handleCategoryClick(cat.slug)}
                     >
                         <div className="overflow-hidden">
                             <Image
@@ -72,10 +92,13 @@ export default function CategoriesAndAges() {
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/30">
                             <div className="text-white text-lg font-semibold mb-4 flex items-center gap-2">
-                                Show Now <ArrowRight className="w-4 h-4" />
+                                Shop Now <ArrowRight className="w-4 h-4" />
                             </div>
                         </div>
                         {/* Label */}
+                        {/* <div className="absolute inset-x-0 bottom-0 bg-white/80 py-2 text-center font-medium text-gray-800">
+                            {cat.title}
+                        </div> */}
                     </div>
                 ))}
             </div>
@@ -94,7 +117,8 @@ export default function CategoriesAndAges() {
                 {shopByAge.map((item, i) => (
                     <div
                         key={i}
-                        className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition relative group"
+                        className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition relative group cursor-pointer"
+                        onClick={() => handleAgeClick(item.slug)}
                     >
                         <div className="overflow-hidden">
                             <Image
@@ -112,6 +136,9 @@ export default function CategoriesAndAges() {
                             </div>
                         </div>
                         {/* Age Label */}
+                        {/* <div className="absolute inset-x-0 bottom-0 bg-white/80 py-2 text-center font-medium text-gray-800">
+                            Ages {item.age}
+                        </div> */}
                     </div>
                 ))}
             </div>

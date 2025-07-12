@@ -2,31 +2,15 @@
 
 import { Product } from "../data/products";
 import ProductCard from "./ProductCard";
-import { useCart } from "../context/CartContext";
+// Removed useCart import as we don't need it anymore
 import { useState } from "react";
 
 const ProductGrid = ({ products }: { products: Product[] }) => {
-    const { addToCart } = useCart();
-    const [addedProducts, setAddedProducts] = useState<Record<number, boolean>>(
-        {}
-    );
+    const [addedProducts] = useState<Record<number, boolean>>({});
 
-    const handleProductClick = (product: Product) => {
-        addToCart(product);
-
-        // Mark this product as added
-        setAddedProducts((prev) => ({
-            ...prev,
-            [product.id]: true,
-        }));
-
-        // Reset the "Added" state after 2 seconds
-        setTimeout(() => {
-            setAddedProducts((prev) => ({
-                ...prev,
-                [product.id]: false,
-            }));
-        }, 2000);
+    const handleProductClick = (productId: number) => {
+        // Navigate to the product detail page
+        window.location.href = `/products/${productId}`;
     };
 
     if (products.length === 0) {
@@ -53,7 +37,7 @@ const ProductGrid = ({ products }: { products: Product[] }) => {
             {products.map((product) => (
                 <div
                     key={product.id}
-                    onClick={() => handleProductClick(product)}
+                    onClick={() => handleProductClick(product.id)}
                     className="cursor-pointer"
                 >
                     <ProductCard

@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import TopMarquee from "./components/Marquee";
 import { CartProvider } from "./context/CartContext";
+import { WishlistProvider } from "./context/WishlistContext";
 
 const quicksand = Quicksand({
     subsets: ["latin"],
@@ -30,10 +31,12 @@ export default function RootLayout({
                 className={`${quicksand.className} font-quicksand antialiased m-0 p-0 overflow-x-hidden`}
             >
                 <CartProvider>
-                    <TopMarquee />
-                    <Navbar />
-                    {children}
-                    <Footer />
+                    <WishlistProvider>
+                        <TopMarquee />
+                        <Navbar />
+                        {children}
+                        <Footer />
+                    </WishlistProvider>
                 </CartProvider>
             </body>
         </html>

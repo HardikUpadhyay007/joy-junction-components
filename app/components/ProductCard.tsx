@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Heart, ShoppingCart, Eye } from "lucide-react";
 import { Product } from "../data/products";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import { useState } from "react";
 
 const ProductCard = ({
@@ -14,7 +16,9 @@ const ProductCard = ({
     isAdded?: boolean;
 }) => {
     const { addToCart } = useCart();
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
     const [addedToCart, setAddedToCart] = useState(false);
+    const liked = isInWishlist(product.id);
 
     // Combine internal state with external prop
     const isAddedToCart = isAdded || addedToCart;
@@ -28,6 +32,15 @@ const ProductCard = ({
         setTimeout(() => {
             setAddedToCart(false);
         }, 2000);
+    };
+
+    const handleToggleWishlist = (e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent triggering parent click handler
+        if (liked) {
+            removeFromWishlist(product.id);
+        } else {
+            addToWishlist(product);
+        }
     };
 
     return (
@@ -60,17 +73,31 @@ const ProductCard = ({
                             <ShoppingCart size={18} />
                         </button>
                         <button
-                            className="bg-white p-2 rounded-full hover:bg-blue-500 hover:text-white transition-colors"
-                            aria-label="Add to wishlist"
+                            onClick={handleToggleWishlist}
+                            className={`${
+                                liked
+                                    ? "bg-red-500 text-white"
+                                    : "bg-white hover:bg-red-500 hover:text-white"
+                            } p-2 rounded-full transition-colors`}
+                            aria-label={
+                                liked
+                                    ? "Remove from wishlist"
+                                    : "Add to wishlist"
+                            }
                         >
-                            <Heart size={18} />
+                            <Heart
+                                size={18}
+                                fill={liked ? "currentColor" : "none"}
+                            />
                         </button>
-                        <button
+                        <Link
+                            href={`/products/${product.id}`}
                             className="bg-white p-2 rounded-full hover:bg-blue-500 hover:text-white transition-colors"
                             aria-label="Quick view"
+                            onClick={(e) => e.stopPropagation()} // Prevent triggering parent click handler
                         >
                             <Eye size={18} />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

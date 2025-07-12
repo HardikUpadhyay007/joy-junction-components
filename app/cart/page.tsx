@@ -7,9 +7,12 @@ import { Minus, Plus, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
 import { useCart } from "../context/CartContext";
 
 export default function CartPage() {
-    const { cartItems, removeFromCart, updateQuantity } = useCart();
+    const { cartItems, removeFromCart, updateQuantity, addToCart } = useCart();
     const [couponCode, setCouponCode] = useState("");
     const [couponApplied, setCouponApplied] = useState(false);
+    const [addedProducts, setAddedProducts] = useState<Record<number, boolean>>(
+        {}
+    );
 
     const handleRemoveItem = (id: number) => {
         removeFromCart(id);
@@ -353,100 +356,159 @@ export default function CartPage() {
                     </div>
                 )}
 
-                {/* Recommended Products */}
-                <div className="mt-16">
-                    <h2 className="text-2xl font-bold text-[#1e1e3f] mb-6 font-baloo">
-                        You Might Also Like
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {[
-                            {
-                                id: 4,
-                                name: "Alphabet Flash Cards",
-                                price: 349,
-                                image: "/age-2-4.jpg",
-                                category: "Flashcard Fun",
-                                discount: 0,
-                            },
-                            {
-                                id: 5,
-                                name: "Math Learning Game",
-                                price: 599,
-                                image: "/age-4-6.jpg",
-                                category: "Kid's Development Games",
-                                discount: 10,
-                            },
-                            {
-                                id: 6,
-                                name: "Wooden Train Set",
-                                price: 1499,
-                                image: "/age-6-8.jpg",
-                                category: "Wooden Wonders",
-                                discount: 0,
-                            },
-                            {
-                                id: 7,
-                                name: "Science Experiment Kit",
-                                price: 899,
-                                image: "/age-8-plus.jpg",
-                                category: "Kid's Development Games",
-                                discount: 5,
-                            },
-                        ].map((product) => (
-                            <div
-                                key={product.id}
-                                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                            >
-                                <div className="h-48 relative">
-                                    <Image
-                                        src={product.image}
-                                        alt={product.name}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                                <div className="p-4">
-                                    <h3 className="font-medium text-[#1e1e3f]">
-                                        {product.name}
-                                    </h3>
-                                    <p className="text-sm text-gray-500 mb-2">
-                                        {product.category}
-                                    </p>
-                                    <div className="flex justify-between items-center">
-                                        <div>
-                                            {product.discount > 0 ? (
-                                                <div>
-                                                    <span className="text-sm text-gray-500 line-through mr-2">
+                {/* Recommended Products - only show if there are items in the cart */}
+                {cartItems.length > 0 && (
+                    <div className="mt-16">
+                        <h2 className="text-2xl font-bold text-[#1e1e3f] mb-6 font-baloo">
+                            You Might Also Like
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {[
+                                {
+                                    id: 4,
+                                    name: "Alphabet Flash Cards",
+                                    price: 349,
+                                    image: "/age-2-4.jpg",
+                                    category: "Flashcard Fun",
+                                    discount: 0,
+                                },
+                                {
+                                    id: 5,
+                                    name: "Math Learning Game",
+                                    price: 599,
+                                    image: "/age-4-6.jpg",
+                                    category: "Kid's Development Games",
+                                    discount: 10,
+                                },
+                                {
+                                    id: 6,
+                                    name: "Wooden Train Set",
+                                    price: 1499,
+                                    image: "/age-6-8.jpg",
+                                    category: "Wooden Wonders",
+                                    discount: 0,
+                                },
+                                {
+                                    id: 7,
+                                    name: "Science Experiment Kit",
+                                    price: 899,
+                                    image: "/age-8-plus.jpg",
+                                    category: "Kid's Development Games",
+                                    discount: 5,
+                                },
+                            ].map((product) => (
+                                <div
+                                    key={product.id}
+                                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                                    onClick={() =>
+                                        (window.location.href = `/products/${product.id}`)
+                                    }
+                                >
+                                    <div className="h-48 relative">
+                                        <Image
+                                            src={product.image}
+                                            alt={product.name}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                    <div className="p-4">
+                                        <h3 className="font-medium text-[#1e1e3f]">
+                                            {product.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-500 mb-2">
+                                            {product.category}
+                                        </p>
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                {product.discount > 0 ? (
+                                                    <div>
+                                                        <span className="text-sm text-gray-500 line-through mr-2">
+                                                            {formatPrice(
+                                                                product.price
+                                                            )}
+                                                        </span>
+                                                        <span className="font-semibold text-[#262b5f]">
+                                                            {formatPrice(
+                                                                Math.round(
+                                                                    product.price *
+                                                                        (1 -
+                                                                            product.discount /
+                                                                                100)
+                                                                )
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                ) : (
+                                                    <span className="font-semibold text-[#262b5f]">
                                                         {formatPrice(
                                                             product.price
                                                         )}
                                                     </span>
-                                                    <span className="font-semibold text-[#262b5f]">
-                                                        {formatPrice(
-                                                            Math.round(
-                                                                product.price *
-                                                                    (1 -
-                                                                        product.discount /
-                                                                            100)
-                                                            )
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            ) : (
-                                                <span className="font-semibold text-[#262b5f]">
-                                                    {formatPrice(product.price)}
-                                                </span>
-                                            )}
+                                                )}
+                                            </div>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // Prevent navigating to product page
+                                                    const productToAdd = {
+                                                        id: product.id,
+                                                        name: product.name,
+                                                        price: product.price,
+                                                        image: product.image,
+                                                        category:
+                                                            product.category,
+                                                        discount:
+                                                            product.discount,
+                                                        ageGroup:
+                                                            product.category ===
+                                                            "Flashcard Fun"
+                                                                ? "2-4"
+                                                                : product.category ===
+                                                                  "Kid's Development Games"
+                                                                ? "4-6"
+                                                                : product.category ===
+                                                                  "Wooden Wonders"
+                                                                ? "6-8"
+                                                                : "8+",
+                                                    };
+                                                    addToCart(productToAdd);
+
+                                                    // Show visual feedback
+                                                    setAddedProducts(
+                                                        (prev) => ({
+                                                            ...prev,
+                                                            [product.id]: true,
+                                                        })
+                                                    );
+
+                                                    // Reset after 2 seconds
+                                                    setTimeout(() => {
+                                                        setAddedProducts(
+                                                            (prev) => ({
+                                                                ...prev,
+                                                                [product.id]:
+                                                                    false,
+                                                            })
+                                                        );
+                                                    }, 2000);
+                                                }}
+                                                className={`text-xs ${
+                                                    addedProducts[product.id]
+                                                        ? "bg-green-500"
+                                                        : "bg-[#262b5f]"
+                                                } text-white px-3 py-1 rounded hover:bg-opacity-90 transition-colors`}
+                                            >
+                                                {addedProducts[product.id]
+                                                    ? "Added!"
+                                                    : "Add to Cart"}
+                                            </button>
                                         </div>
-                                        <button className="text-xs bg-[#262b5f] text-white px-3 py-1 rounded hover:bg-opacity-90 transition-colors">
-                                            Add to Cart
-                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
