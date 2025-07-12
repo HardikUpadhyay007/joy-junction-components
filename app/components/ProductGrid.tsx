@@ -2,8 +2,33 @@
 
 import { Product } from "../data/products";
 import ProductCard from "./ProductCard";
+import { useCart } from "../context/CartContext";
+import { useState } from "react";
 
 const ProductGrid = ({ products }: { products: Product[] }) => {
+    const { addToCart } = useCart();
+    const [addedProducts, setAddedProducts] = useState<Record<number, boolean>>(
+        {}
+    );
+
+    const handleProductClick = (product: Product) => {
+        addToCart(product);
+
+        // Mark this product as added
+        setAddedProducts((prev) => ({
+            ...prev,
+            [product.id]: true,
+        }));
+
+        // Reset the "Added" state after 2 seconds
+        setTimeout(() => {
+            setAddedProducts((prev) => ({
+                ...prev,
+                [product.id]: false,
+            }));
+        }, 2000);
+    };
+
     if (products.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
@@ -26,7 +51,17 @@ const ProductGrid = ({ products }: { products: Product[] }) => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <div
+                    key={product.id}
+                    onClick={() => handleProductClick(product)}
+                    className="cursor-pointer"
+                >
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        isAdded={addedProducts[product.id] || false}
+                    />
+                </div>
             ))}
         </div>
     );

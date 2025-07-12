@@ -3,40 +3,9 @@
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-
-const blogPosts = [
-    {
-        title: "What's the Ideal screen time for children",
-        date: "May 20, 2024",
-        category: "Toddlers",
-        image: "/blogpic.jpg",
-    },
-    {
-        title: "The Awesome Benefits of Hanging Out with Buddies!",
-        date: "May 20, 2024",
-        category: "Toddlers",
-        image: "/blogpic.jpg",
-    },
-    {
-        title: "Teacher recommended educational and learning toys for a 4-year-old",
-        date: "May 20, 2024",
-        category: "Toddlers",
-        image: "/blogpic.jpg",
-    },
-    {
-        title: "5 Toys That Build Motor Skills Fast",
-        date: "May 20, 2024",
-        category: "Toddlers",
-        image: "/blogpic.jpg",
-    },
-    {
-        title: "How Play Enhances Cognitive Growth",
-        date: "May 20, 2024",
-        category: "Toddlers",
-        image: "/blogpic.jpg",
-    },
-];
+import { blogs } from "../data/blogs";
 
 export default function BlogCarousel() {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -115,55 +84,60 @@ export default function BlogCarousel() {
                 </p>
 
                 <div ref={sliderRef} className="keen-slider">
-                    {blogPosts.map((post, i) => (
+                    {blogs.map((blog, i) => (
                         <div key={i} className="keen-slider__slide">
-                            <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group h-[400px] flex flex-col">
-                                <div className="relative overflow-hidden">
-                                    <Image
-                                        src={post.image}
-                                        alt={post.title}
-                                        width={500}
-                                        height={300}
-                                        className="w-full h-[220px] object-cover transition-transform duration-300 group-hover:scale-105"
-                                    />
-                                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                                        <span className="text-xs font-semibold text-[#262b5f]">
-                                            {post.category}
-                                        </span>
+                            <Link
+                                href={`/blogs/${blog.id}`}
+                                className="block h-full"
+                            >
+                                <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group h-[400px] flex flex-col">
+                                    <div className="relative overflow-hidden">
+                                        <Image
+                                            src={blog.image}
+                                            alt={blog.title}
+                                            width={500}
+                                            height={300}
+                                            className="w-full h-[220px] object-cover transition-transform duration-300 group-hover:scale-105"
+                                        />
+                                        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                                            <span className="text-xs font-semibold text-[#262b5f]">
+                                                {blog.category}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="p-5 flex flex-col flex-grow">
+                                        <p className="text-xs text-gray-500 mb-2 flex items-center">
+                                            <span className="inline-block w-4 h-[2px] bg-[#262b5f] mr-2"></span>
+                                            {blog.date}
+                                        </p>
+                                        <h3 className="text-lg font-bold text-[#1e1e3f] leading-snug group-hover:text-[#262b5f] transition-colors line-clamp-2 min-h-[3.5rem]">
+                                            {blog.title}
+                                        </h3>
+                                        <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
+                                            <span className="text-xs font-medium text-[#262b5f]">
+                                                Read more
+                                            </span>
+                                            <span className="w-8 h-8 rounded-full bg-[#f2f2f7] flex items-center justify-center group-hover:bg-[#262b5f] transition-colors">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="14"
+                                                    height="14"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    className="text-[#262b5f] group-hover:text-white transition-colors"
+                                                >
+                                                    <path d="M5 12h14"></path>
+                                                    <path d="m12 5 7 7-7 7"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="p-5 flex flex-col flex-grow">
-                                    <p className="text-xs text-gray-500 mb-2 flex items-center">
-                                        <span className="inline-block w-4 h-[2px] bg-[#262b5f] mr-2"></span>
-                                        {post.date}
-                                    </p>
-                                    <h3 className="text-lg font-bold text-[#1e1e3f] leading-snug group-hover:text-[#262b5f] transition-colors line-clamp-2 min-h-[3.5rem]">
-                                        {post.title}
-                                    </h3>
-                                    <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
-                                        <span className="text-xs font-medium text-[#262b5f]">
-                                            Read more
-                                        </span>
-                                        <span className="w-8 h-8 rounded-full bg-[#f2f2f7] flex items-center justify-center group-hover:bg-[#262b5f] transition-colors">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="14"
-                                                height="14"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className="text-[#262b5f] group-hover:text-white transition-colors"
-                                            >
-                                                <path d="M5 12h14"></path>
-                                                <path d="m12 5 7 7-7 7"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>
@@ -192,22 +166,20 @@ export default function BlogCarousel() {
 
                     {/* Dots */}
                     <div className="flex items-center gap-2">
-                        {[...Array(Math.min(5, blogPosts.length))].map(
-                            (_, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() =>
-                                        instanceRef.current?.moveToIdx(idx)
-                                    }
-                                    className={`w-2.5 h-2.5 rounded-full transition-all ${
-                                        currentSlide === idx
-                                            ? "bg-[#262b5f] w-8"
-                                            : "bg-[#cfcfcf] hover:bg-[#262b5f]/50"
-                                    }`}
-                                    aria-label={`Go to slide ${idx + 1}`}
-                                />
-                            )
-                        )}
+                        {[...Array(Math.min(5, blogs.length))].map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() =>
+                                    instanceRef.current?.moveToIdx(idx)
+                                }
+                                className={`w-2.5 h-2.5 rounded-full transition-all ${
+                                    currentSlide === idx
+                                        ? "bg-[#262b5f] w-8"
+                                        : "bg-[#cfcfcf] hover:bg-[#262b5f]/50"
+                                }`}
+                                aria-label={`Go to slide ${idx + 1}`}
+                            />
+                        ))}
                     </div>
 
                     <button
@@ -229,6 +201,16 @@ export default function BlogCarousel() {
                             <path d="m9 18 6-6-6-6" />
                         </svg>
                     </button>
+                </div>
+
+                {/* View All Blogs Button */}
+                <div className="mt-10 text-center">
+                    <Link
+                        href="/blogs"
+                        className="inline-block px-6 py-3 bg-[#262b5f] text-white rounded-lg hover:bg-opacity-90 transition-colors"
+                    >
+                        View All Blogs
+                    </Link>
                 </div>
             </div>
         </section>

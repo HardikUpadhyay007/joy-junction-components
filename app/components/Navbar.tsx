@@ -77,6 +77,7 @@ import {
     Mail,
 } from "lucide-react";
 import Image from "next/image";
+import { useCart } from "../context/CartContext";
 
 const ageGroups = ["2-4", "4-6", "6-8", "8+"];
 const categories = [
@@ -91,6 +92,7 @@ const Navbar = () => {
     const [showAgeDropdown, setShowAgeDropdown] = useState(false);
     const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { cartCount } = useCart();
 
     const filterRoute = (type: string, value: string) => {
         router.push(`/products?${type}=${value}`);
@@ -202,6 +204,7 @@ const Navbar = () => {
                 >
                     Custom Kit
                 </Link>
+
                 <Link
                     href="/contact"
                     className="hover:text-blue-300 transition-colors"
@@ -211,12 +214,17 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center space-x-5">
-                <div className="hidden sm:block relative cursor-pointer hover:text-blue-300 transition-colors">
+                <Link
+                    href="/cart"
+                    className="hidden sm:block relative cursor-pointer hover:text-blue-300 transition-colors"
+                >
                     <ShoppingCart size={22} />
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                        0
-                    </span>
-                </div>
+                    {cartCount > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                            {cartCount}
+                        </span>
+                    )}
+                </Link>
                 <div className="hidden sm:block cursor-pointer hover:text-blue-300 transition-colors">
                     <Heart size={22} />
                 </div>
@@ -332,6 +340,13 @@ const Navbar = () => {
                                 About Us
                             </Link>
                             <Link
+                                href="/blogs"
+                                className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Blogs
+                            </Link>
+                            <Link
                                 href="/faq"
                                 className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
                                 onClick={() => setMobileMenuOpen(false)}
@@ -345,6 +360,20 @@ const Navbar = () => {
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Contact Us
+                            </Link>
+
+                            <Link
+                                href="/cart"
+                                className="flex items-center gap-2 text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                <ShoppingCart size={18} />
+                                <span>Cart</span>
+                                {cartCount > 0 && (
+                                    <span className="ml-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                        {cartCount}
+                                    </span>
+                                )}
                             </Link>
                         </div>
 
