@@ -30,7 +30,7 @@ export default function FeatureStrip() {
                         key={i}
                         className="flex flex-col items-center text-center border border-gray-200 rounded-xl p-8 py-10 hover:shadow-xl transition"
                     >
-                        <div className="w-48 h-48 mb-6">
+                        <div className="w-48 h-48 mb-6 ">
                             <Image
                                 src={feature.image}
                                 alt={feature.title}

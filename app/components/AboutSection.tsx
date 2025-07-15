@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import CircularText from "./CircularText";
+// import CircularText from "./CircularText";
 
 export default function AboutSection() {
     return (
