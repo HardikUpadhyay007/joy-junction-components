@@ -1,66 +1,4 @@
-// import Image from "next/image";
-// import {
-//     Heart,
-//     Search,
-//     ShoppingCart,
-//     User,
-//     Menu,
-//     ChevronDown,
-// } from "lucide-react";
 
-// const Navbar = () => {
-//     return (
-//         <nav className="bg-[#1E2A4A] text-white p-4 flex items-center justify-between">
-//             {/* Logo */}
-//             <div className="flex items-center">
-//                 <Image
-//                     src="/logo.png"
-//                     alt="The Joy Junction"
-//                     width={100}
-//                     height={50}
-//                 />
-//             </div>
-
-//             {/* Navigation Links */}
-//             <div className="hidden md:flex items-center space-x-6">
-//                 <a href="#" className="hover:text-gray-300">
-//                     Home
-//                 </a>
-//                 <a href="#" className="hover:text-gray-300 flex items-center">
-//                     Shop by Age <ChevronDown size={16} className="ml-1" />
-//                 </a>
-//                 <a href="#" className="hover:text-gray-300 flex items-center">
-//                     Shop by Categories{" "}
-//                     <ChevronDown size={16} className="ml-1" />
-//                 </a>
-//                 <a href="#" className="hover:text-gray-300">
-//                     Custom Kit
-//                 </a>
-//                 <a href="#" className="hover:text-gray-300">
-//                     Contact Us
-//                 </a>
-//             </div>
-
-//             {/* Icons */}
-//             <div className="flex items-center space-x-4">
-//                 <div className="relative">
-//                     <ShoppingCart size={24} />
-//                     <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-//                         0
-//                     </span>
-//                 </div>
-//                 <Heart size={24} />
-//                 <Search size={24} />
-//                 <User size={24} />
-//                 <div className="bg-white text-black rounded-full p-1">
-//                     <Menu size={24} />
-//                 </div>
-//             </div>
-//         </nav>
-//     );
-// };
-
-// export default Navbar;
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -408,8 +346,9 @@ const Navbar = () => {
                         }
                     }}
                 >
-                    <div className="bg-white text-gray-800 h-full w-full max-w-xs md:max-w-md p-6 overflow-y-auto animate-slide-left">
-                        <div className="flex justify-between items-center mb-8">
+                    <div className="bg-white text-gray-800 h-full w-full max-w-xs md:max-w-md p-4 flex flex-col animate-slide-left">
+                        {/* Header with Logo and Close button */}
+                        <div className="flex justify-between items-center mb-4">
                             <Image
                                 src="/logo.png"
                                 alt="logo"
@@ -426,7 +365,7 @@ const Navbar = () => {
                         </div>
 
                         {/* Mobile Search Input */}
-                        <div className="mb-6">
+                        <div className="mb-4">
                             <form
                                 onSubmit={(e) => {
                                     e.preventDefault();
@@ -449,7 +388,7 @@ const Navbar = () => {
                                         setSearchTerm(e.target.value)
                                     }
                                     placeholder="Search products..."
-                                    className="w-full py-2.5 px-4 pl-10 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    className="w-full py-2 px-4 pl-10 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 />
                                 <Search
                                     className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
@@ -464,171 +403,162 @@ const Navbar = () => {
                             </form>
                         </div>
 
-                        <div className="space-y-6 mb-8">
-                            <Link
-                                href="/"
-                                className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Home
-                            </Link>
+                        {/* Navigation links - in a scrollable container */}
+                        <div className="flex-1 overflow-y-auto">
+                            <div className="space-y-4">
+                                <Link
+                                    href="/"
+                                    className="block text-base font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Home
+                                </Link>
 
-                            <div className="rounded-xl overflow-hidden border border-blue-100">
-                                <div className="bg-gradient-to-r from-blue-500 to-purple-500 py-3 px-4">
-                                    <h3 className="text-lg font-medium text-white">
-                                        Shop by Age
-                                    </h3>
-                                    <p className="text-xs text-blue-100">
-                                        Find perfect toys for every age
-                                    </p>
+                                <div className="rounded-lg overflow-hidden border border-blue-100">
+                                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 py-2 px-3">
+                                        <h3 className="text-base font-medium text-white">
+                                            Shop by Age
+                                        </h3>
+                                        <p className="text-xs text-blue-100">
+                                            Find perfect toys for every age
+                                        </p>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-2 p-2 bg-white">
+                                        {ageGroups.map((age) => (
+                                            <div
+                                                key={age}
+                                                onClick={() => filterRoute("age", age)}
+                                                className="py-1.5 px-2 cursor-pointer bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
+                                            >
+                                                <span className="w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center text-xs font-bold text-blue-600">
+                                                    {age}
+                                                </span>
+                                                <span className="font-medium text-sm">
+                                                    Ages {age}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-3 p-3 bg-white">
-                                    {ageGroups.map((age) => (
-                                        <div
-                                            key={age}
-                                            onClick={() =>
-                                                filterRoute("age", age)
-                                            }
-                                            className="py-2.5 px-3 cursor-pointer bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
-                                        >
-                                            <span className="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center text-sm font-bold text-blue-600">
-                                                {age}
+
+                                <div className="rounded-lg overflow-hidden border border-green-100">
+                                    <div className="bg-gradient-to-r from-green-500 to-teal-500 py-2 px-3">
+                                        <h3 className="text-base font-medium text-white">
+                                            Shop by Categories
+                                        </h3>
+                                        <p className="text-xs text-green-100">
+                                            Explore our collection
+                                        </p>
+                                    </div>
+                                    <div className="grid grid-cols-1 gap-2 p-2 bg-white">
+                                        {categories.map((cat) => (
+                                            <div
+                                                key={cat}
+                                                onClick={() => filterRoute("category", cat)}
+                                                className="py-1.5 px-2 cursor-pointer bg-green-50 hover:bg-green-100 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
+                                            >
+                                                <span className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-xs font-medium text-green-600">
+                                                    {cat[0]}
+                                                </span>
+                                                <span className="font-medium text-sm">
+                                                    {cat}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap gap-x-4">
+                                    <Link
+                                        href="/partnership-program"
+                                        className="text-base font-medium hover:text-blue-600 transition-colors py-2 w-[45%]"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        Partnership
+                                    </Link>
+                                    <Link
+                                        href="/about-us"
+                                        className="text-base font-medium hover:text-blue-600 transition-colors py-2 w-[45%]"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        About Us
+                                    </Link>
+                                    <Link
+                                        href="/blogs"
+                                        className="text-base font-medium hover:text-blue-600 transition-colors py-2 w-[45%]"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        Blogs
+                                    </Link>
+                                    <Link
+                                        href="/faq"
+                                        className="text-base font-medium hover:text-blue-600 transition-colors py-2 w-[45%]"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        FAQ
+                                    </Link>
+                                    <Link
+                                        href="/contact"
+                                        className="text-base font-medium hover:text-blue-600 transition-colors py-2 w-[45%]"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        Contact
+                                    </Link>
+                                </div>
+
+                                <div className="flex justify-between pt-2">
+                                    <Link
+                                        href="/cart"
+                                        className="flex items-center gap-1 text-base font-medium hover:text-blue-600 transition-colors py-1"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        <ShoppingCart size={16} />
+                                        <span>Cart</span>
+                                        {cartCount > 0 && (
+                                            <span className="ml-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                                {cartCount}
                                             </span>
-                                            <span className="font-medium">
-                                                Ages {age}
+                                        )}
+                                    </Link>
+
+                                    <Link
+                                        href="/wishlist"
+                                        className="flex items-center gap-1 text-base font-medium hover:text-blue-600 transition-colors py-1"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        <Heart size={16} />
+                                        <span>Wishlist</span>
+                                        {wishlistCount > 0 && (
+                                            <span className="ml-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                                {wishlistCount}
                                             </span>
-                                        </div>
-                                    ))}
+                                        )}
+                                    </Link>
                                 </div>
                             </div>
-
-                            <div className="rounded-xl overflow-hidden border border-green-100 mt-6">
-                                <div className="bg-gradient-to-r from-green-500 to-teal-500 py-3 px-4">
-                                    <h3 className="text-lg font-medium text-white">
-                                        Shop by Categories
-                                    </h3>
-                                    <p className="text-xs text-green-100">
-                                        Explore our collection
-                                    </p>
-                                </div>
-                                <div className="space-y-2 p-3 bg-white">
-                                    {categories.map((cat) => (
-                                        <div
-                                            key={cat}
-                                            onClick={() =>
-                                                filterRoute("category", cat)
-                                            }
-                                            className="py-2.5 px-3 cursor-pointer bg-green-50 hover:bg-green-100 rounded-lg transition-colors flex items-center gap-3 shadow-sm"
-                                        >
-                                            <span className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-sm font-medium text-green-600">
-                                                {cat[0]}
-                                            </span>
-                                            <span className="font-medium">
-                                                {cat}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <Link
-                                href="/partnership-program"
-                                className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Partnership Program
-                            </Link>
-                            <Link
-                                href="/about-us"
-                                className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                About Us
-                            </Link>
-                            <Link
-                                href="/blogs"
-                                className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Blogs
-                            </Link>
-                            <Link
-                                href="/faq"
-                                className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                FAQ
-                            </Link>
-
-                            <Link
-                                href="/contact"
-                                className="block text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Contact Us
-                            </Link>
-
-                            <Link
-                                href="/cart"
-                                className="flex items-center gap-2 text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                <ShoppingCart size={18} />
-                                <span>Cart</span>
-                                {cartCount > 0 && (
-                                    <span className="ml-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                        {cartCount}
-                                    </span>
-                                )}
-                            </Link>
-
-                            <Link
-                                href="/wishlist"
-                                className="flex items-center gap-2 text-lg font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                <Heart size={18} />
-                                <span>Wishlist</span>
-                                {wishlistCount > 0 && (
-                                    <span className="ml-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                        {wishlistCount}
-                                    </span>
-                                )}
-                            </Link>
                         </div>
 
-                        <div className="mt-8 space-y-4">
-                            <h3 className="text-lg font-semibold text-gray-800">
-                                Get in Touch
-                            </h3>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                    <Phone
-                                        size={18}
-                                        className="text-blue-600"
-                                    />
+                        {/* Contact info in the footer - always visible */}
+                        <div className="mt-4 pt-2 border-t border-gray-100">
+                            <div className="grid grid-cols-2 gap-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <Phone size={14} className="text-blue-600" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-gray-500">Call us</p>
+                                        <p className="text-sm font-medium">+91 98765 43210</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="text-sm text-gray-500">
-                                        Call us at
-                                    </p>
-                                    <p className="font-medium">
-                                        +91 98765 43210
-                                    </p>
-                                </div>
-                            </div>
 
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                    <Mail size={18} className="text-blue-600" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-gray-500">
-                                        Email us at
-                                    </p>
-                                    <p className="font-medium">
-                                        hello@thejoyjunction.com
-                                    </p>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <Mail size={14} className="text-blue-600" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-gray-500">Email</p>
+                                        <p className="text-sm font-medium">hello@thejoyjunction.com</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

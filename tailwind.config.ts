@@ -8,6 +8,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            screens: {
+                xs: "480px",
+            },
             fontFamily: {
                 baloo: ["var(--font-baloo)"],
                 fredoka: ["var(--font-fredoka)"],
