@@ -19,7 +19,7 @@ export default function AboutSection() {
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
-                </div>00
+                </div>
 
                 {/* Right column with text and image 2 on desktop */}
                 <div className="w-full flex flex-col">
