@@ -6,36 +6,47 @@ import { Heart, ShoppingCart, Eye } from "lucide-react";
 import { Product } from "../data/products";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-import { useState } from "react";
+// import { useState } from "react";
 
-const ProductCard = ({
-    product,
-    isAdded,
-}: {
-    product: Product;
-    isAdded?: boolean;
-}) => {
-    const { addToCart } = useCart();
+// const ProductCard = ({
+//     product,
+    
+// }: {
+//     product: Product;
+    
+// }) => {
+//     const { addToCart, updateQuantity, cartItems } = useCart();
+//     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+//     // const [addedToCart, setAddedToCart] = useState(false);
+//     const liked = isInWishlist(product.id);
+
+//     // Get actual quantity from cart
+//     const cartItem = cartItems.find((item) => item.id === product.id);
+//     const quantityInCart = cartItem?.quantity || 0;
+
+//     const handleAddToCart = (e: React.MouseEvent) => {
+//         e.stopPropagation();
+//         addToCart(product);
+//         // setAddedToCart(true);
+//         // setTimeout(() => setAddedToCart(false), 2000);
+//     };
+
+const ProductCard = ({ product }: { product: Product }) => {
+    const { addToCart, updateQuantity, cartItems } = useCart();
     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
-    const [addedToCart, setAddedToCart] = useState(false);
     const liked = isInWishlist(product.id);
 
-    // Combine internal state with external prop
-    const isAddedToCart = isAdded || addedToCart;
+    const cartItem = cartItems.find((item) => item.id === product.id);
+    const quantityInCart = cartItem?.quantity || 0;
 
     const handleAddToCart = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent triggering parent click handler
+        e.stopPropagation();
         addToCart(product);
-        setAddedToCart(true);
-
-        // Reset the "Added" state after 2 seconds
-        setTimeout(() => {
-            setAddedToCart(false);
-        }, 2000);
     };
 
+
     const handleToggleWishlist = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent triggering parent click handler
+        e.stopPropagation();
         if (liked) {
             removeFromWishlist(product.id);
         } else {
@@ -64,7 +75,7 @@ const ProductCard = ({
                         <button
                             onClick={handleAddToCart}
                             className={`${
-                                isAddedToCart
+                                quantityInCart > 0
                                     ? "bg-green-500 text-white"
                                     : "bg-white hover:bg-blue-500 hover:text-white"
                             } p-2 rounded-full transition-colors`}
@@ -94,7 +105,7 @@ const ProductCard = ({
                             href={`/products/${product.id}`}
                             className="bg-white p-2 rounded-full hover:bg-blue-500 hover:text-white transition-colors"
                             aria-label="Quick view"
-                            onClick={(e) => e.stopPropagation()} // Prevent triggering parent click handler
+                            onClick={(e) => e.stopPropagation()}
                         >
                             <Eye size={18} />
                         </Link>
@@ -130,16 +141,39 @@ const ProductCard = ({
                             </div>
                         )}
                     </div>
-                    <button
-                        onClick={handleAddToCart}
-                        className={`text-xs py-1 px-2 rounded ${
-                            isAddedToCart
-                                ? "bg-green-500 text-white"
-                                : "bg-[#262b5f] text-white hover:bg-opacity-90"
-                        } transition-colors flex items-center gap-1`}
-                    >
-                        {isAddedToCart ? "Added" : "Add to cart"}
-                    </button>
+
+                    {/* Quantity logic starts here */}
+                    {quantityInCart === 0 ? (
+  <button
+    onClick={handleAddToCart}
+    className="text-xs py-1 px-2 rounded bg-[#262b5f] text-white hover:bg-opacity-90 transition-colors flex items-center gap-1"
+  >
+    Add to cart
+  </button>
+) : (
+  <div className="flex items-center gap-2">
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        updateQuantity(product.id, quantityInCart - 1);
+      }}
+      className="bg-gray-200 px-2 py-0.5 rounded text-sm hover:bg-gray-300"
+    >
+      -
+    </button>
+    <span className="text-sm font-semibold">{quantityInCart}</span>
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        updateQuantity(product.id, quantityInCart + 1);
+      }}
+      className="bg-gray-200 px-2 py-0.5 rounded text-sm hover:bg-gray-300"
+    >
+      +
+    </button>
+  </div>
+)}
+
                 </div>
             </div>
         </div>

@@ -3,10 +3,10 @@
 import { Product } from "../data/products";
 import ProductCard from "./ProductCard";
 // Removed useCart import as we don't need it anymore
-import { useState } from "react";
+// import { useState } from "react";
 
 const ProductGrid = ({ products }: { products: Product[] }) => {
-    const [addedProducts] = useState<Record<number, boolean>>({});
+    // const [addedProducts] = useState<Record<number, boolean>>({});
 
     const handleProductClick = (productId: number) => {
         // Navigate to the product detail page
@@ -43,7 +43,7 @@ const ProductGrid = ({ products }: { products: Product[] }) => {
                     <ProductCard
                         key={product.id}
                         product={product}
-                        isAdded={addedProducts[product.id] || false}
+                        // isAdded={addedProducts[product.id] || false}
                     />
                 </div>
             ))}
