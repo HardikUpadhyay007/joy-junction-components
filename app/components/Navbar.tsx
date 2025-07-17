@@ -155,7 +155,7 @@ const Navbar = () => {
             {/* Search Overlay */}
             {searchOpen && (
                 <div
-                    className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-start justify-center pt-16 md:pt-24"
+                    className="fixed inset-0 backdrop-blur-md text-black bg-white/30 z-50 flex items-start justify-center pt-16 md:pt-24"
                     onClick={(e) => {
                         if (e.target === e.currentTarget) {
                             setSearchOpen(false);
@@ -164,14 +164,14 @@ const Navbar = () => {
                 >
                     <div className="bg-white rounded-xl p-6 w-full max-w-2xl mx-4 animate-slide-down shadow-2xl">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-lg font-semibold text-gray-800">
+                            <h3 className="text-lg font-semibold text-black">
                                 Search Products
                             </h3>
                             <button
                                 onClick={() => setSearchOpen(false)}
                                 className="p-2 rounded-full hover:bg-gray-100 transition-colors"
                             >
-                                <X size={20} className="text-gray-600" />
+                                <X size={20} className="text-black" />
                             </button>
                         </div>
 
