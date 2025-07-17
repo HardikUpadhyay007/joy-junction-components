@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import {
     Menu,
-    ChevronDown,
     ShoppingCart,
     Heart,
     Search,
@@ -30,8 +29,6 @@ const categories = [
 
 const Navbar = () => {
     const router = useRouter();
-    const [showAgeDropdown, setShowAgeDropdown] = useState(false);
-    const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -90,114 +87,12 @@ const Navbar = () => {
                     Home
                 </Link>
 
-                <div
-                    className="relative group"
-                    onMouseEnter={() => setShowAgeDropdown(true)}
-                    onMouseLeave={() => setShowAgeDropdown(false)}
+                <Link
+                    href="/products"
+                    className="hover:text-blue-300 transition-colors"
                 >
-                    <button className="flex items-center gap-1.5 hover:text-blue-300 transition-colors py-2 font-medium">
-                        Shop by Age{" "}
-                        <ChevronDown
-                            size={16}
-                            className={`transition-transform duration-300 ${
-                                showAgeDropdown
-                                    ? "rotate-180 text-blue-300"
-                                    : ""
-                            }`}
-                        />
-                    </button>
-                    <div
-                        className={`absolute top-10 left-0 bg-white text-gray-800 rounded-xl overflow-hidden shadow-xl p-0 min-w-[200px] z-50 transform transition-all duration-300 origin-top ${
-                            showAgeDropdown
-                                ? "opacity-100 scale-100"
-                                : "opacity-0 scale-95 pointer-events-none"
-                        }`}
-                    >
-                        <div className="absolute top-0 left-4 -mt-2 transform rotate-45 w-3 h-3 bg-white border-t border-l border-gray-100"></div>
-                        <div className="bg-gradient-to-r from-blue-500 to-purple-500 py-3 px-4">
-                            <h3 className="font-semibold text-white">
-                                Shop by Age
-                            </h3>
-                            <p className="text-xs text-blue-100">
-                                Find perfect toys for every age
-                            </p>
-                        </div>
-                        <div className="p-2">
-                            {ageGroups.map((age) => (
-                                <div
-                                    key={age}
-                                    onClick={() => {
-                                        filterRoute("age", age);
-                                        setShowAgeDropdown(false);
-                                    }}
-                                    className="py-2.5 px-3 cursor-pointer hover:bg-blue-50 rounded-lg transition-colors flex items-center gap-3 group"
-                                >
-                                    <span className="w-8 h-8 rounded-full bg-blue-100 group-hover:bg-blue-200 flex items-center justify-center text-sm font-bold text-blue-600 transition-colors">
-                                        {age}
-                                    </span>
-                                    <span className="group-hover:text-blue-600 font-medium transition-colors">
-                                        Ages {age} years
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    className="relative group"
-                    onMouseEnter={() => setShowCategoryDropdown(true)}
-                    onMouseLeave={() => setShowCategoryDropdown(false)}
-                >
-                    <button className="flex items-center gap-1.5 hover:text-blue-300 transition-colors py-2 font-medium">
-                        Shop by Categories{" "}
-                        <ChevronDown
-                            size={16}
-                            className={`transition-transform duration-300 ${
-                                showCategoryDropdown
-                                    ? "rotate-180 text-blue-300"
-                                    : ""
-                            }`}
-                        />
-                    </button>
-                    <div
-                        className={`absolute top-10 left-0 bg-white text-gray-800 rounded-xl overflow-hidden shadow-xl p-0 min-w-[240px] z-50 transform transition-all duration-300 origin-top ${
-                            showCategoryDropdown
-                                ? "opacity-100 scale-100"
-                                : "opacity-0 scale-95 pointer-events-none"
-                        }`}
-                    >
-                        <div className="absolute top-0 left-4 -mt-2 transform rotate-45 w-3 h-3 bg-white border-t border-l border-gray-100"></div>
-                        <div className="bg-gradient-to-r from-green-500 to-teal-500 py-3 px-4">
-                            <h3 className="font-semibold text-white">
-                                Shop by Categories
-                            </h3>
-                            <p className="text-xs text-green-100">
-                                Explore our collection
-                            </p>
-                        </div>
-
-                        <div className="p-2">
-                            {categories.map((cat) => (
-                                <div
-                                    key={cat}
-                                    onClick={() => {
-                                        filterRoute("category", cat);
-                                        setShowCategoryDropdown(false);
-                                    }}
-                                    className="py-2.5 px-3 cursor-pointer hover:bg-green-50 rounded-lg transition-colors flex items-center gap-3 group"
-                                >
-                                    <span className="w-8 h-8 rounded-full bg-green-100 group-hover:bg-green-200 flex items-center justify-center text-sm font-medium text-green-600 transition-colors">
-                                        {cat[0]}
-                                    </span>
-                                    <span className="group-hover:text-green-600 font-medium transition-colors">
-                                        {cat}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                    Products
+                </Link>
 
                 <Link
                     href="/customkit"
@@ -260,7 +155,7 @@ const Navbar = () => {
             {/* Search Overlay */}
             {searchOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16 md:pt-24"
+                    className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-start justify-center pt-16 md:pt-24"
                     onClick={(e) => {
                         if (e.target === e.currentTarget) {
                             setSearchOpen(false);
@@ -418,61 +313,22 @@ className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex justify-end tran
                                     Home
                                 </Link>
 
-                                <div className="rounded-lg overflow-hidden border border-blue-100">
-                                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 py-2 px-3">
-                                        <h3 className="text-base font-medium text-white">
-                                            Shop by Age
-                                        </h3>
-                                        <p className="text-xs text-blue-100">
-                                            Find perfect toys for every age
-                                        </p>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-2 p-2 bg-white">
-                                        {ageGroups.map((age) => (
-                                            <div
-                                                key={age}
-                                                onClick={() => filterRoute("age", age)}
-                                                className="py-1.5 px-2 cursor-pointer bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
-                                            >
-                                                <span className="w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center text-xs font-bold text-blue-600">
-                                                    {age}
-                                                </span>
-                                                <span className="font-medium text-sm">
-                                                    Ages {age}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div className="rounded-lg overflow-hidden border border-green-100">
-                                    <div className="bg-gradient-to-r from-green-500 to-teal-500 py-2 px-3">
-                                        <h3 className="text-base font-medium text-white">
-                                            Shop by Categories
-                                        </h3>
-                                        <p className="text-xs text-green-100">
-                                            Explore our collection
-                                        </p>
-                                    </div>
-                                    <div className="grid grid-cols-1 gap-2 p-2 bg-white">
-                                        {categories.map((cat) => (
-                                            <div
-                                                key={cat}
-                                                onClick={() => filterRoute("category", cat)}
-                                                className="py-1.5 px-2 cursor-pointer bg-green-50 hover:bg-green-100 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
-                                            >
-                                                <span className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-xs font-medium text-green-600">
-                                                    {cat[0]}
-                                                </span>
-                                                <span className="font-medium text-sm">
-                                                    {cat}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                                <Link
+                                    href="/products"
+                                    className="block text-base font-medium hover:text-blue-600 transition-colors py-2 border-b border-gray-100"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Products
+                                </Link>
 
                                 <div className="flex flex-wrap gap-x-4">
+                                    <Link
+                                        href="/customkit"
+                                        className="text-base font-medium hover:text-blue-600 transition-colors py-2 w-[45%]"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        Custom Kit
+                                    </Link>
                                     <Link
                                         href="/partnership-program"
                                         className="text-base font-medium hover:text-blue-600 transition-colors py-2 w-[45%]"

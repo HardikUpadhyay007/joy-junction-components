@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import Image from "next/image";
@@ -6,30 +8,6 @@ import { Heart, ShoppingCart, Eye } from "lucide-react";
 import { Product } from "../data/products";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-// import { useState } from "react";
-
-// const ProductCard = ({
-//     product,
-    
-// }: {
-//     product: Product;
-    
-// }) => {
-//     const { addToCart, updateQuantity, cartItems } = useCart();
-//     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
-//     // const [addedToCart, setAddedToCart] = useState(false);
-//     const liked = isInWishlist(product.id);
-
-//     // Get actual quantity from cart
-//     const cartItem = cartItems.find((item) => item.id === product.id);
-//     const quantityInCart = cartItem?.quantity || 0;
-
-//     const handleAddToCart = (e: React.MouseEvent) => {
-//         e.stopPropagation();
-//         addToCart(product);
-//         // setAddedToCart(true);
-//         // setTimeout(() => setAddedToCart(false), 2000);
-//     };
 
 const ProductCard = ({ product }: { product: Product }) => {
     const { addToCart, updateQuantity, cartItems } = useCart();
@@ -55,8 +33,8 @@ const ProductCard = ({ product }: { product: Product }) => {
     };
 
     return (
-        <div className="group shadow-lg rounded-lg bg-white overflow-hidden transition-all duration-300 hover:shadow-xl">
-            <div className="relative w-full h-56 overflow-hidden">
+        <div className="shadow-lg rounded-lg bg-white overflow-hidden transition-all duration-300 hover:shadow-xl">
+            <div className="relative w-full h-56 overflow-hidden group">
                 <Image
                     src={product.image}
                     alt={product.name}
