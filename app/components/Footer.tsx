@@ -31,15 +31,15 @@ export default function Footer() {
                             <Link href="/">Home</Link>
                         </li>
                         <li>
-                            <Link href="/shop/age">Shop by Age →</Link>
+                            <Link href="/products">Shop by Age →</Link>
                         </li>
                         <li>
-                            <Link href="/shop/categories">
+                            <Link href="/products">
                                 Shop by Categories →
                             </Link>
                         </li>
                         <li>
-                            <Link href="/custom-kit">Custom Kit</Link>
+                            <Link href="/customkit">Custom Kit</Link>
                         </li>
                         <li>
                             <Link href="/contact">Contact Us</Link>
@@ -57,12 +57,12 @@ export default function Footer() {
                             <Link href="/privacy-policy">Privacy Policy</Link>
                         </li>
                         <li>
-                            <Link href="/returns">
+                            <Link href="/refund">
                                 Refund and Returns Policy
                             </Link>
                         </li>
                         <li>
-                            <Link href="/terms">Terms and Condition</Link>
+                            <Link href="/tnc">Terms and Condition</Link>
                         </li>
                     </ul>
                 </div>
