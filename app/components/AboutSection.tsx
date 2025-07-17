@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-// import CircularText from "./CircularText";
+import CircularText from "./CircularText";
 
 export default function AboutSection() {
     return (
@@ -17,6 +17,26 @@ export default function AboutSection() {
                             fill
                             className="object-contain"
                             sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        
+                        {/* Circular Text positioned at bottom end of first image - Hidden on mobile */}
+                        <div className="hidden md:block absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 z-10">
+                            <CircularText 
+                                                    text="C        R        A        F        T        E        D        •        W        I        T        H        •        L        O        V        E        •        "
+                                spinDuration={15}
+                                onHover="speedUp"
+                                className="w-[150px] h-[150px] text-orange-500 bg-yellow-100 shadow-lg"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Circular Text for mobile - Centered below first image */}
+                    <div className="md:hidden mt-6 flex justify-center">
+                        <CircularText 
+                            text="C R A F T E D   W I T H   L O V E   •   D E S I G N E D   F O R   K I D S   •   "
+                            spinDuration={15}
+                            onHover="speedUp"
+                            className="w-[100px] h-[100px] text-orange-500 bg-yellow-100 shadow-lg"
                         />
                     </div>
                 </div>
@@ -54,9 +74,6 @@ export default function AboutSection() {
                         />
                     </div>
                 </div>
-
-                {/* Circle Stamp - Positioned at the center between columns in desktop */}
-                
             </div>
         </section>
     );
