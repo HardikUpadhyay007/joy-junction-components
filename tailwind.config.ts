@@ -26,6 +26,9 @@ const config: Config = {
                 float: "float 6s ease-in-out infinite",
                 "bounce-slow": "bounce-slow 3s ease-in-out infinite",
                 "pulse-slow": "pulse-slow 4s ease-in-out infinite",
+                "float-cloud": "float-cloud 30s linear infinite",
+                "twinkle": "twinkle 2s ease-in-out infinite",
+                "lightning": "lightning 8s ease-out infinite",
             },
             keyframes: {
                 "marquee-rtl": {
@@ -56,6 +59,23 @@ const config: Config = {
                 "slide-left": {
                     "0%": { transform: "translateX(100%)" },
                     "100%": { transform: "translateX(0)" },
+                },
+                "float-cloud": {
+                    "0%": { transform: "translateX(-20%) translateY(0)" },
+                    "50%": { transform: "translateX(45%) translateY(-15px)" },
+                    "100%": { transform: "translateX(110%) translateY(0)" },
+                },
+                "twinkle": {
+                    "0%": { opacity: "0.2", transform: "scale(0.8)" },
+                    "50%": { opacity: "1", transform: "scale(1)" },
+                    "100%": { opacity: "0.2", transform: "scale(0.8)" },
+                },
+                "lightning": {
+                    "0%, 100%": { opacity: "0" },
+                    "3%, 4%": { opacity: "0.8" },
+                    "5%, 7%": { opacity: "0" },
+                    "8%, 9%": { opacity: "1" },
+                    "10%, 100%": { opacity: "0" },
                 },
             },
         },

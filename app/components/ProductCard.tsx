@@ -59,7 +59,7 @@ const ProductCard = ({
                     </span>
                 )}
 
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <div className="absolute inset-0 backdrop-blur-0 group-hover:backdrop-blur-sm bg-white/0 group-hover:bg-white/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                     <div className="flex gap-2">
                         <button
                             onClick={handleAddToCart}

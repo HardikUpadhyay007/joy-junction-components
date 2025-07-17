@@ -14,6 +14,7 @@ import {
     Phone,
     Mail,
     ArrowRight,
+    
 } from "lucide-react";
 import Image from "next/image";
 import { useCart } from "../context/CartContext";
@@ -77,9 +78,11 @@ const Navbar = () => {
 
     return (
         <nav className="bg-[#1E2A4A] text-white p-4 flex items-center justify-between">
-            <Image src="/logo.png" alt="logo" width={100} height={50} />
+            <Link href="/">
+                <Image src="/logo.png" alt="logo" width={100} height={50} />
+            </Link> 
 
-            <div className="hidden md:flex items-center space-x-6 relative">
+            <div className="hidden md:flex items-center space-x-6 relative ">
                 <Link
                     href="/"
                     className="hover:text-blue-300 transition-colors"
@@ -338,7 +341,8 @@ const Navbar = () => {
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end"
+className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex justify-end transition-all duration-300"
+
                     onClick={(e) => {
                         // Close when clicking outside the menu
                         if (e.target === e.currentTarget) {
